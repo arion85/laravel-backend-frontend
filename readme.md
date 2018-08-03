@@ -1,3 +1,26 @@
+## About My structure
+<p>Backend folder for backend</p>
+<p>Frontend folder for frontend :)</p>
+<p>Common for general files, such as models, etc.</p>
+<p>Структура папок в Frontend и Backend соответствуют структуре стандартного приложения laravel</p>
+
+#ARTISAN
+<p>Для работы с Frontend нужно запустить artisan</p>
+<p>Для работы с Backend нужно запусить admartisan</p>
+
+#SITE CONFIG
+<p>В папке Common/config общие настройки для Backend и Frontend частей</p>
+<p>Что бы разделить настройки, нужно удалить ключ из Common/config/*.php и добавить его в {Frontend | Backend}/config/*.php</p>
+
+#SERVER CONFIG
+<p>site.dom => Frontend/public/</p>
+<p>admin.site.dom => Backend/public/</p>
+
+#INSTALL
+<p>git clone https://github.com/arion85/laravel-backend-frontend.git mySite</p>
+<p>cd mySyte</p>
+<p>composer install</p>
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
