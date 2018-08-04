@@ -18,7 +18,7 @@
 
 #INSTALL
 <p>git clone https://github.com/arion85/laravel-backend-frontend.git mySite</p>
-<p>cd mySyte</p>
+<p>cd mySite</p>
 <p>composer install</p>
 <p>run -> <b>php -r "file_exists('.env') || copy('.env.example', 'Frontend/.env');"</b></p>
 <p>run -> <b>php -r "file_exists('.env') || copy('.env.example', 'Backend/.env');"</b></p>
