@@ -15,3 +15,4 @@ npm-debug.log
 yarn-error.log
 Frontend/.env
 Backend/.env
+/*.result.cache
