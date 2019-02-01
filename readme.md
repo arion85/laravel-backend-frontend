@@ -18,7 +18,7 @@
 #Установка / INSTALL
 1. git clone https://github.com/arion85/laravel-backend-frontend.git _mySite_
 2. cd _mySite_
-3. **composer install**
+3. run -> **composer install**
 4. run -> **php -r "file_exists('.env') || copy('.env.example', 'Frontend/.env');"**
 5. run -> **php -r "file_exists('.env') || copy('.env.example', 'Backend/.env');"**
 6. run -> **php artisan key:generate**
