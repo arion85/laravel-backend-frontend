@@ -1,7 +1,7 @@
 ## About My structure
-<p>Backend folder for backend</p>
-<p>Frontend folder for frontend :)</p>
-<p>Common for general files, such as models, etc.</p>
+<p>**/Backend** folder for backend</p>
+<p>**/Frontend** folder for frontend :)</p>
+<p>**/Common** for general files, such as models, etc.</p>
 <p>Структура папок в Frontend и Backend соответствуют структуре стандартного приложения laravel</p>
 
 #ARTISAN
@@ -19,7 +19,7 @@
 #INSTALL
 <p>git clone https://github.com/arion85/laravel-backend-frontend.git mySite</p>
 <p>cd mySite</p>
-<p>composer install</p>
+<p>**composer install**</p>
 <p>run -> <b>php -r "file_exists('.env') || copy('.env.example', 'Frontend/.env');"</b></p>
 <p>run -> <b>php -r "file_exists('.env') || copy('.env.example', 'Backend/.env');"</b></p>
 <p>run -> <b>php artisan key:generate</b></p>
