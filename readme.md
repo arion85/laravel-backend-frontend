@@ -9,6 +9,8 @@
 | 1. В папке **/Common/config** находятся общие настройки для _Backend_ и _Frontend_ частей<br/>2. Что бы разделить настройки, нужно удалить необходимый ключ из **/Common/config/\*.php** и добавить его в **/{_Frontend_ или _Backend_}/config/\*.php** | 1. In the **/Common/config** folder there are general settings for _Backend_ and _Frontend_ parts <br/> 2. To separate the settings, you need to remove the necessary key from **/Common/config/\*.php** and add it to **/{_Frontend_ or _Backend_}/config/\*.php** |
 |* **Настройки сервера**|* **Server settings**|
 | 1. Основной сайт - _site.dom_ => **/Frontend/public/**<br/>2. Административная часть - _admin.site.dom_ => **/Backend/public/** | 1. For Frontend part - _site.dom_ => **/Frontend/public/** <br/> 2.For Backend part - _admin.site.dom_ => **/Backend/public/** |
+|* **Использование встроенного сервера Laravel**|* **Using the built-in server Laravel**|
+| 1. Запустить **php artisan serve**<br/> 2. Добавить в файл /hosts строку **"127.0.0.1 admin.127.0.0.1"** (без ковычек)<br/>3. URL основного сайта **http://127.0.0.1:8000**<br/>4. URL Административной части - **http://admin.127.0.0.1:8000** | 1. Run command **php artisan serve** <br/>2. Add the line **"127.0.0.1 admin.127.0.0.1"** (without quotes) to the your /hosts file<br/>3. URL for _Frontend_ **http://127.0.0.1:8000** <br/> 4. URL for _Backend_- **http://admin.127.0.0.1:8000** |
 
 #Установка / INSTALL
 1. git clone https://github.com/arion85/laravel-backend-frontend.git _mySite_
