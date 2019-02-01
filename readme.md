@@ -1,88 +1,42 @@
-## About My structure
-<p>**/Backend** folder for backend</p>
-<p>**/Frontend** folder for frontend :)</p>
-<p>**/Common** for general files, such as models, etc.</p>
-<p>Структура папок в Frontend и Backend соответствуют структуре стандартного приложения laravel</p>
+|Русский|English<br/>(Google Translator)  |
+|----------|------|
+|##Назначение папок<br/>**/Backend** папка для админ. части приложения<br/>**/Frontend** папка для сайта<br/>**/Common** папка для общих файлов, например, моделей, конфигурации и т.п.|##About My structure<br/>**/Backend** folder for backend part<br/>**/Frontend** folder for frontend part<br/>**/Common** for general files, such as models, etc.|
+| Структура папок в **/Frontend** и **/Backend** соответствуют структуре стандартного приложения laravel | The structure of folders in **/Frontend** and **/Backend** correspond to the structure of the standard applications laravel |
 
-#ARTISAN
-<p>Для работы с Frontend нужно запустить artisan</p>
-<p>Для работы с Backend нужно запусить admartisan</p>
+|Использование команды ARTISAN|Using the ARTISAN command|
+|---|---|
+| Для работы с _Backend_ необходимо запускать **admartisan**<br/>Для остальных случаев необходимо использовать **artisan** | To work with _Backend_ you need to run **admartisan** <br/> For other cases, you must use **artisan** |
 
-#SITE CONFIG
-<p>В папке Common/config общие настройки для Backend и Frontend частей</p>
-<p>Что бы разделить настройки, нужно удалить ключ из Common/config/*.php и добавить его в {Frontend | Backend}/config/*.php</p>
+|Настройка конфигурации|Configuration setting|
+|---|---|
+| 1. В папке **/Common/config** находятся общие настройки для _Backend_ и _Frontend_ частей<br/>2. Что бы разделить настройки, нужно удалить необходимый ключ из **/Common/config/\*.php** и добавить его в **/{_Frontend_ или _Backend_}/config/\*.php** | 1. In the **/Common/config** folder there are general settings for _Backend_ and _Frontend_ parts <br/> 2. To separate the settings, you need to remove the necessary key from **/Common/config/\*.php** and add it to **/{_Frontend_ or _Backend _}/config/\*.php** |
 
-#SERVER CONFIG
-<p>site.dom => Frontend/public/</p>
-<p>admin.site.dom => Backend/public/</p>
+|Настройки сервера|Server settings|
+|---|---|
+| 1. Основной сайт - _site.dom_ => **/Frontend/public/**<br/>2. Административная часть - _admin.site.dom_ => **/Backend/public/** | 1. For Frontend part - _site.dom_ => **/Frontend/public/** <br/> 2.For Backend part - _admin.site.dom_ => **/Backend/public/** |
 
-#INSTALL
-<p>git clone https://github.com/arion85/laravel-backend-frontend.git mySite</p>
-<p>cd mySite</p>
-<p>**composer install**</p>
-<p>run -> <b>php -r "file_exists('.env') || copy('.env.example', 'Frontend/.env');"</b></p>
-<p>run -> <b>php -r "file_exists('.env') || copy('.env.example', 'Backend/.env');"</b></p>
-<p>run -> <b>php artisan key:generate</b></p>
-<p>run -> <b>php admartisan key:generate</b></p>
+|Использование команды ARTISAN|Using the ARTISAN command|
+|---|---|
+| Для работы с _Backend_ необходимо запускать **admartisan**<br/>Для остальных случаев необходимо использовать **artisan** | To work with _Backend_ you need to run **admartisan** <br/> For other cases, you must use **artisan** |
 
-
+#Установка / INSTALL
+1. git clone https://github.com/arion85/laravel-backend-frontend.git _mySite_
+2. cd _mySite_
+3. **composer install**
+4. run -> **php -r "file_exists('.env') || copy('.env.example', 'Frontend/.env');"**
+5. run -> **php -r "file_exists('.env') || copy('.env.example', 'Backend/.env');"**
+6. run -> **php artisan key:generate**
+7. run -> **php admartisan key:generate**
+<br/>
+<br/>
+<br/>
+<hr/>
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+<br/>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
-
+##Learning Laravel<br/>
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.<br/>
 If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
 ## License
-
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
