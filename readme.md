@@ -15,10 +15,6 @@
 |---|---|
 | 1. Основной сайт - _site.dom_ => **/Frontend/public/**<br/>2. Административная часть - _admin.site.dom_ => **/Backend/public/** | 1. For Frontend part - _site.dom_ => **/Frontend/public/** <br/> 2.For Backend part - _admin.site.dom_ => **/Backend/public/** |
 
-|Использование команды ARTISAN|Using the ARTISAN command|
-|---|---|
-| Для работы с _Backend_ необходимо запускать **admartisan**<br/>Для остальных случаев необходимо использовать **artisan** | To work with _Backend_ you need to run **admartisan** <br/> For other cases, you must use **artisan** |
-
 #Установка / INSTALL
 1. git clone https://github.com/arion85/laravel-backend-frontend.git _mySite_
 2. cd _mySite_
