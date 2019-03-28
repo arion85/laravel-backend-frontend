@@ -23,10 +23,14 @@
     19 => 'Illuminate\\Translation\\TranslationServiceProvider',
     20 => 'Illuminate\\Validation\\ValidationServiceProvider',
     21 => 'Illuminate\\View\\ViewServiceProvider',
-    22 => 'Backend\\Providers\\AppServiceProvider',
-    23 => 'Backend\\Providers\\AuthServiceProvider',
-    24 => 'Backend\\Providers\\EventServiceProvider',
-    25 => 'Backend\\Providers\\RouteServiceProvider',
+    22 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+    23 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    24 => 'Carbon\\Laravel\\ServiceProvider',
+    25 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    26 => 'Backend\\Providers\\AppServiceProvider',
+    27 => 'Backend\\Providers\\AuthServiceProvider',
+    28 => 'Backend\\Providers\\EventServiceProvider',
+    29 => 'Backend\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (
@@ -40,10 +44,12 @@
     7 => 'Illuminate\\Pagination\\PaginationServiceProvider',
     8 => 'Illuminate\\Session\\SessionServiceProvider',
     9 => 'Illuminate\\View\\ViewServiceProvider',
-    10 => 'Backend\\Providers\\AppServiceProvider',
-    11 => 'Backend\\Providers\\AuthServiceProvider',
-    12 => 'Backend\\Providers\\EventServiceProvider',
-    13 => 'Backend\\Providers\\RouteServiceProvider',
+    10 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+    11 => 'Carbon\\Laravel\\ServiceProvider',
+    12 => 'Backend\\Providers\\AppServiceProvider',
+    13 => 'Backend\\Providers\\AuthServiceProvider',
+    14 => 'Backend\\Providers\\EventServiceProvider',
+    15 => 'Backend\\Providers\\RouteServiceProvider',
   ),
   'deferred' => 
   array (
@@ -72,6 +78,8 @@
     'command.migrate.reset' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'command.migrate.rollback' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'command.migrate.status' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'command.optimize' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'command.optimize.clear' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'command.package.discover' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'command.preset' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'command.queue.failed' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
@@ -146,6 +154,8 @@
     'translation.loader' => 'Illuminate\\Translation\\TranslationServiceProvider',
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
+    'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
+    'NunoMaduro\\Collision\\Contracts\\Provider' => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
   ),
   'when' => 
   array (
@@ -183,6 +193,12 @@
     array (
     ),
     'Illuminate\\Validation\\ValidationServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Tinker\\TinkerServiceProvider' => 
+    array (
+    ),
+    'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => 
     array (
     ),
   ),

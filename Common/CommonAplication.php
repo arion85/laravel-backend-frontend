@@ -2,7 +2,12 @@
 
 namespace Common;
 
+use Illuminate\Container\Container;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Foundation\Mix;
 use Illuminate\Foundation\Application;
+use Illuminate\Foundation\PackageManifest;
+
 use RuntimeException;
 
 class CommonAplication extends Application
@@ -30,5 +35,24 @@ class CommonAplication extends Application
         }
 
         throw new RuntimeException('Unable to detect application namespace.');
+    }
+
+    /**
+     * Register the basic bindings into the container.
+     *
+     * @return void
+     */
+    protected function registerBaseBindings()
+    {
+        static::setInstance($this);
+
+        $this->instance('app', $this);
+
+        $this->instance(Container::class, $this);
+        $this->singleton(Mix::class);
+
+        $this->instance(PackageManifest::class, new PackageManifest(
+            new Filesystem, dirname($this->basePath()), $this->getCachedPackagesPath()
+        ));
     }
 }

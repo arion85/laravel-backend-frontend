@@ -16,3 +16,4 @@ yarn-error.log
 Frontend/.env
 Backend/.env
 /*.result.cache
+/composer.phar
