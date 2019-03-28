@@ -17,3 +17,5 @@ Frontend/.env
 Backend/.env
 /*.result.cache
 /composer.phar
+/Frontend/storage/
+/Backend/storage/
