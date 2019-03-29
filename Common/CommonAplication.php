@@ -44,15 +44,10 @@ class CommonAplication extends Application
      */
     protected function registerBaseBindings()
     {
-        static::setInstance($this);
+        parent::registerBaseBindings();
 
-        $this->instance('app', $this);
-
-        $this->instance(Container::class, $this);
-        $this->singleton(Mix::class);
-
-        $this->instance(PackageManifest::class, new PackageManifest(
-            new Filesystem, dirname($this->basePath()), $this->getCachedPackagesPath()
-        ));
+        $PackageManifest = app()->make(PackageManifest::class);
+        $PackageManifest->basePath = dirname($this->basePath());
+        $PackageManifest->vendorPath = dirname($this->basePath()).DIRECTORY_SEPARATOR.'vendor';
     }
 }

@@ -19,3 +19,5 @@ Backend/.env
 /composer.phar
 /Frontend/storage/
 /Backend/storage/
+/Backend/bootstrap/cache/
+/Frontend/bootstrap/cache/
