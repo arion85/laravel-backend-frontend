@@ -21,3 +21,4 @@ Backend/.env
 /Backend/storage/
 /Backend/bootstrap/cache/
 /Frontend/bootstrap/cache/
+/Frontend_/

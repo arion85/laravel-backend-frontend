@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Backend\Http\Controllers\MainPage;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,4 +14,8 @@
 |
 */
 
-Route::get('/', 'MainPage');
+/*Route::get('/', function () {
+    return view('welcome');
+});*/
+
+Route::get('/', [MainPage::class, '__invoke']);
