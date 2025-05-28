@@ -13,6 +13,16 @@ require __DIR__.'/vendor/autoload.php';
 /** @var Application $app */
 $app = require_once __DIR__.'/bootstrap/app.php';
 
-$status = $app->handleCommand(new ArgvInput);
+$new_args = array_filter($_SERVER['argv'],function ($val){
+    if(str_starts_with($val, '--side=')){
+        --$_SERVER['argc'];
+        return false;
+    }
+    return true;
+});
+
+$_SERVER['argv']=$new_args;
+
+$status = $app->handleCommand(new ArgvInput());
 
 exit($status);

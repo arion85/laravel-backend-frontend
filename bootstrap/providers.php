@@ -1,5 +1,7 @@
 <?php
 
+$prefix=ucfirst(app()->get('app.side'));
+
 return [
-    App\Providers\AppServiceProvider::class,
+    $prefix.'\\'.App\Providers\AppServiceProvider::class,
 ];
