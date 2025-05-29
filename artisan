@@ -11,9 +11,9 @@ require __DIR__.'/vendor/autoload.php';
 
 // Bootstrap Laravel and handle the command...
 /** @var Application $app */
-$app = require_once __DIR__.'/bootstrap/app.php';
+$app = require_once __DIR__.'/common/bootstrap/app.php';
 
-$app_cli_side = match ((new ArgvInput())->getParameterOption('--side') ?? null){
+$app_cli_side = match ((new ArgvInput())->getParameterOption('--side') ?: null){
     null=>'common',
     'be'=>'backend',
     'fe'=>'frontend'
