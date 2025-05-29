@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories;
+namespace common\database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;

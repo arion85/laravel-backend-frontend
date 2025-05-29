@@ -18,20 +18,21 @@ $app = Application::configure(basePath: dirname(__DIR__))
     ->create();
 
 $app->beforeBootstrapping('Illuminate\Foundation\Bootstrap\RegisterProviders', function (Application $app){
-    if(!app()->runningInConsole()){
-        $request = app('request');
-        $side = $request->host();
+
+    $app = app();
+
+    if(!$app->runningInConsole()){
+        $side = $app->request()->host();
+        $adm_prefURL = $app->config()->get('app.app_admin_prefixurl');
     }else{
-        $input = (new ArgvInput);
-        $side = $input->getParameterOption('--side');
+        $side = $app->get('app.cli.side');
+        $adm_prefURL='';
     }
 
-    $config = app('config');
-
-    $adm_prefURL = $config->get('app.app_admin_prefixurl');
-
-    if (preg_match("/^{$adm_prefURL}.*/", $side)) {
+    if (preg_match("/^{$adm_prefURL}.*/", $side) || $side='backend') {
         $app->instance('app.side', 'backend');
+    }else if($side='common'){
+        $app->instance('app.side', 'common');
     }else{
         $app->instance('app.side', 'frontend');
     }
