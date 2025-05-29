@@ -4,8 +4,11 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\ApplicationBuilder;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Symfony\Component\Console\Input\ArgvInput;
 
-const DS = DIRECTORY_SEPARATOR;
+if (!defined('DS')) {
+    define('DS', DIRECTORY_SEPARATOR);
+}
 
 $app = Application::configure(basePath: dirname(__DIR__,1))
     ->withMiddleware(function (Middleware $middleware) {
@@ -16,13 +19,21 @@ $app = Application::configure(basePath: dirname(__DIR__,1))
     })
     ->create();
 
+$app_cli_side = match ((new ArgvInput())->getParameterOption('--side') ?: null){
+    null=>'common',
+    'be'=>'backend',
+    'fe'=>'frontend'
+};
+
+$app->instance('app.cli.side', $app_cli_side);
+
 $app->useEnvironmentPath(dirname(__DIR__,2));
 
 $app->beforeBootstrapping('Illuminate\Foundation\Bootstrap\RegisterProviders', function (Application $app){
 
     $app = app();
 
-    if(!$app->runningInConsole()){
+    if(!$app->runningInConsole() || $app->runningUnitTests()){
         $side = $app->make('request')->host();
         $adm_prefURL = $app->make('config')->get('app.app_admin_prefixurl');
     }else{
