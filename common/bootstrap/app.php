@@ -51,14 +51,16 @@ $app->beforeBootstrapping('Illuminate\Foundation\Bootstrap\RegisterProviders', f
 
     $app->instance('path.resources',$app->get('path.side').DS.'resources');
 
-    $app->get(ApplicationBuilder::class)
-        //->withProviders(require $app->bootstrapPath('providers.php'))
-        ->withRouting(
-            web: $app->get('path.side').DS.'routes'.DS.'web.php',
-            commands: $app->get('path.side').DS.'routes'.DS.'console.php',
-            health: '/up',
+    if ($app->get('app.side') != 'common') {
+        $app->get(ApplicationBuilder::class)
+            //->withProviders(require $app->bootstrapPath('providers.php'))
+            ->withRouting(
+                web: $app->get('path.side') . DS . 'routes' . DS . 'web.php',
+                commands: $app->get('path.side') . DS . 'routes' . DS . 'console.php',
+                health: '/up',
 
-        );
+            );
+    }
 });
 
 $app->beforeBootstrapping('Illuminate\Foundation\Bootstrap\BootProviders', function (Application $app){
