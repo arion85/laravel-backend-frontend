@@ -36,7 +36,8 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
-            "@php artisan package:discover --ansi --side=adm"
+            "@php artisan package:discover --ansi --side=fe",
+            "@php artisan package:discover --ansi --side=be"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
@@ -46,7 +47,7 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi",
-            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php -r \"file_exists('common/database/database.sqlite') || touch('common/database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
         ],
         "dev": [
