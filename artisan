@@ -13,6 +13,14 @@ require __DIR__.'/vendor/autoload.php';
 /** @var Application $app */
 $app = require_once __DIR__.'/bootstrap/app.php';
 
+$app_cli_side = match ((new ArgvInput())->getParameterOption('--side') ?? null){
+    null=>'common',
+    'be'=>'backend',
+    'fe'=>'frontend'
+};
+
+$app->instance('app.cli.side', $app_cli_side);
+
 $new_args = array_filter($_SERVER['argv'],function ($val){
     if(str_starts_with($val, '--side=')){
         --$_SERVER['argc'];
