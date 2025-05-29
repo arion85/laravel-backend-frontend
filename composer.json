@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "laravel-bf/laravel-bf",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "The skeleton backend/frontend application for the Laravel framework.",
+    "keywords": ["laravel", "framework", "backend", "frontend"],
     "license": "MIT",
     "require": {
         "php": "^8.2",
@@ -20,11 +20,11 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
+            "Common\\App\\": "common/app/",
             "Backend\\App\\": "backend/app/",
             "Frontend\\App\\": "frontend/app/",
-            "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Common\\Database\\Factories\\": "common/database/factories/",
+            "Common\\Database\\Seeders\\": "common/database/seeders/"
         }
     },
     "autoload-dev": {
