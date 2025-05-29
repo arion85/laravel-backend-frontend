@@ -7,7 +7,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 
 const DS = DIRECTORY_SEPARATOR;
 
-$app = Application::configure(basePath: dirname(__DIR__))
+$app = Application::configure(basePath: dirname(__DIR__,1))
     ->withMiddleware(function (Middleware $middleware) {
         //
     })
@@ -16,29 +16,39 @@ $app = Application::configure(basePath: dirname(__DIR__))
     })
     ->create();
 
+$app->useEnvironmentPath(dirname(__DIR__,2));
+
 $app->beforeBootstrapping('Illuminate\Foundation\Bootstrap\RegisterProviders', function (Application $app){
 
     $app = app();
 
     if(!$app->runningInConsole()){
-        $side = $app->request()->host();
-        $adm_prefURL = $app->config()->get('app.app_admin_prefixurl');
+        $side = $app->make('request')->host();
+        $adm_prefURL = $app->make('config')->get('app.app_admin_prefixurl');
     }else{
         $side = $app->get('app.cli.side');
         $adm_prefURL='';
     }
 
-    if (preg_match("/^{$adm_prefURL}.*/", $side) || $side='backend') {
+    if (preg_match("/^{$adm_prefURL}.*/", $side) || $side=='backend') {
         $app->instance('app.side', 'backend');
-    }else if($side='common'){
+    }else if($side=='common'){
         $app->instance('app.side', 'common');
     }else{
         $app->instance('app.side', 'frontend');
     }
 
+    $app->setBasePath(dirname(__DIR__,2));
     $app->instance('path.side',$app->basePath($app->get('app.side')));
+
+    $app->useConfigPath($app->basePath('common'.DS.'config'));
+    $app->useDatabasePath($app->basePath('common'.DS.'database'));
+
     $app->useAppPath($app->get('path.side').DS.'app');
     $app->useBootstrapPath($app->get('path.side').DS.'bootstrap');
+    $app->useLangPath($app->get('path.side').DS.'lang');
+    $app->useStoragePath($app->get('path.side').DS.'storage');
+
     $app->instance('path.resources',$app->get('path.side').DS.'resources');
 
     $app->get(ApplicationBuilder::class)
