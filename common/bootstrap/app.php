@@ -30,7 +30,7 @@ $app->beforeBootstrapping('Illuminate\Foundation\Bootstrap\RegisterProviders', f
         $adm_prefURL='';
     }
 
-    if (preg_match("/^{$adm_prefURL}.*/", $side) || $side=='backend') {
+    if (str_starts_with($side,"{$adm_prefURL}." ) || $side=='backend') {
         $app->instance('app.side', 'backend');
     }else if($side=='common'){
         $app->instance('app.side', 'common');
