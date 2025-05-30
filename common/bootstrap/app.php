@@ -33,12 +33,12 @@ $app->beforeBootstrapping('Illuminate\Foundation\Bootstrap\RegisterProviders', f
 
     $app = app();
 
-    if(!$app->runningInConsole() || $app->runningUnitTests()){
-        $side = $app->make('request')->host();
-        $adm_prefURL = $app->make('config')->get('app.app_admin_prefixurl');
-    }else{
+    if($app->runningInConsole() || $app->runningUnitTests()){
         $side = $app->get('app.cli.side');
         $adm_prefURL='';
+    }else{
+        $side = $app->make('request')->host();
+        $adm_prefURL = $app->make('config')->get('app.app_admin_prefixurl');
     }
 
     if (str_starts_with($side,"{$adm_prefURL}." ) || $side=='backend') {
