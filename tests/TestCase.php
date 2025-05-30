@@ -9,11 +9,13 @@ use Illuminate\Http\Request;
 
 abstract class TestCase extends BaseTestCase
 {
-    protected string $side;
+    public static string $side;
     public function createApplication()
     {
-        array_push($_SERVER['argv'], $this->side);
-        ++$_SERVER['argc'];
+        if (isset(self::$side) && !is_null(self::$side)) {
+            $_SERVER['argv'][] = self::$side;
+            ++$_SERVER['argc'];
+        }
 
         $app = require Application::inferBasePath().'/common/bootstrap/app.php';
 
