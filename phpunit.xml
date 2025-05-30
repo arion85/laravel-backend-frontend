@@ -8,10 +8,14 @@
         <testsuite name="Unit">
             <directory>tests/Unit</directory>
         </testsuite>
-        <testsuite name="Feature">
-            <file>tests/Feature/CommonTest.php</file>
-            <file>tests/Feature/BackendTest.php</file>
-            <file>tests/Feature/FrontendTest.php</file>
+        <testsuite name="FeatureCommon">
+            <directory>tests/Feature/Common</directory>
+        </testsuite>
+        <testsuite name="FeatureFrontend">
+            <directory>tests/Feature/Frontend</directory>
+        </testsuite>
+        <testsuite name="FeatureBackend">
+            <directory>tests/Feature/Backend</directory>
         </testsuite>
     </testsuites>
     <source>
