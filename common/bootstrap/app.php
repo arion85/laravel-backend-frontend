@@ -7,16 +7,27 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Symfony\Component\Console\Input\ArgvInput;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Bootstrap\LoadConfiguration;
+use Illuminate\Foundation\PackageManifest;
 
 if (!defined('DS')) {
     define('DS', DIRECTORY_SEPARATOR);
 }
 
-$app = Application::configure(basePath: dirname(__DIR__))->create();
+$app = Application::configure(basePath: dirname(__DIR__,2))->create();
 
-$app->make(LoadConfiguration::class)->bootstrap($app);
+$app->useEnvironmentPath(dirname(__DIR__,2));
+$app->useAppPath($app->basePath('common'.DS.'app'));
+$app->useBootstrapPath($app->basePath('common'.DS.'bootstrap'));
+$app->useLangPath($app->basePath('common'.DS.'lang'));
+$app->useStoragePath($app->basePath('common'.DS.'storage'));
+$app->useConfigPath($app->basePath('common'.DS.'config'));
+$app->useDatabasePath($app->basePath('common'.DS.'database'));
+$app->usePublicPath($app->basePath('common'.DS.'public'));
+$app->instance('path.resources',$app->basePath('common'.DS.'resources'));
 
-$app->instance('app.side', 'common');
+$app->afterResolving(PackageManifest::class, function ($pack_manifest){
+    $s=$pack_manifest;
+});
 
 if($app->runningInConsole() || $app->runningUnitTests()){
     $app_cli_side = match ((new ArgvInput())->getParameterOption('--side') ?: null){
@@ -24,88 +35,49 @@ if($app->runningInConsole() || $app->runningUnitTests()){
         'be'=>'backend',
         'fe'=>'frontend'
     };
-    $adm_prefURL='';
+    $app->instance('app.side', $app_cli_side);
 }else{
     $side = Request::capture()->host();
+    $app->make(LoadConfiguration::class)->bootstrap($app);
+
     $adm_prefURL = app('config')->get('app.app_admin_prefixurl');
+    if (str_starts_with($side,"{$adm_prefURL}." )) {
+        $app->instance('app.side', 'backend');
+    }else{
+        $app->instance('app.side', 'frontend');
+    }
+
+
 }
 
-if (str_starts_with($side,"{$adm_prefURL}." ) || $side=='backend') {
-    $app->instance('app.side', 'backend');
-}else if($side=='common'){
-    $app->instance('app.side', 'common');
-}else{
-    $app->instance('app.side', 'frontend');
-}
-
-$app_side = $app->get('app.side');
-
-$app->useEnvironmentPath(dirname(__DIR__,2));
+//$app->get(ApplicationBuilder::class)
+//    ->withProviders(require $app->basePath($app->get('app.side').DS.'bootstrap'.DS.'providers.php'))
+//    ->withExceptions(function (Exceptions $exceptions) {
+//        //
+//    })
+//    ->withMiddleware(function (Middleware $middleware) {
+//        //
+//    });
 
 $app->beforeBootstrapping('Illuminate\Foundation\Bootstrap\RegisterProviders', function (Application $app){
+    $app_side = $app->get('app.side');
 
-    $app = app();
+    $app->useStoragePath($app->basePath($app_side.DS.'storage'));
+    $app->useAppPath($app->basePath($app_side.DS.'app'));
+    $app->useBootstrapPath($app->basePath($app_side.DS.'bootstrap'));
 
-//    if($app->runningInConsole() || $app->runningUnitTests()){
-//        $side = $app->get('app.cli.side');
-//        $adm_prefURL='';
-//    }else{
-//        $side = $app->make('request')->host();
-//        $adm_prefURL = $app->make('config')->get('app.app_admin_prefixurl');
-//    }
-
-//    if (str_starts_with($side,"{$adm_prefURL}." ) || $side=='backend') {
-//        $app->instance('app.side', 'backend');
-//    }else if($side=='common'){
-//        $app->instance('app.side', 'common');
-//    }else{
-//        $app->instance('app.side', 'frontend');
-//    }
-//
-//    $app_side = $app->get('app.side');
-
-    $app->setBasePath(dirname(__DIR__,2));
-    $app->instance('path.side',$app->basePath($app_side));
-
-    $app->useConfigPath($app->basePath('common'.DS.'config'));
-    $app->useDatabasePath($app->basePath('common'.DS.'database'));
-
-    if($app_side == 'frontend'){
-        $app->usePublicPath($app->basePath('public'));
-    }else{
-        $app->usePublicPath($app->basePath($app_side.DS.'public'));
-    }
-
-    $app_path_side = $app->get('path.side');
-
-    $app->useAppPath($app_path_side.DS.'app');
-    $app->useBootstrapPath($app_path_side.DS.'bootstrap');
-    $app->useLangPath($app_path_side.DS.'lang');
-    $app->useStoragePath($app_path_side.DS.'storage');
-
-    $app->instance('path.resources',$app_path_side.DS.'resources');
-
-    if ($app_side != 'common') {
-        $app->get(ApplicationBuilder::class)
-            //->withProviders(require $app->bootstrapPath('providers.php'))
-            ->withMiddleware(function (Middleware $middleware) {
-                //
-            })
-            ->withExceptions(function (Exceptions $exceptions) {
-                //
-            })
-            ->withRouting(
-                web: $app->get('path.side') . DS . 'routes' . DS . 'web.php',
-                commands: $app->get('path.side') . DS . 'routes' . DS . 'console.php',
-                health: '/up',
-
-            );
-    }
+    $app->get(ApplicationBuilder::class)
+        ->withRouting(
+            web: $app->basePath($app_side . DS . 'routes' . DS . 'web.php'),
+            commands: $app->basePath($app_side . DS . 'routes' . DS . 'console.php'),
+            health: '/up',
+        );
 });
 
 $app->beforeBootstrapping('Illuminate\Foundation\Bootstrap\BootProviders', function (Application $app){
+    $app = app();
     $view = app('view');
-    $view->addLocation(app()->get('path.side').DS.'views');
+    $view->addLocation($app->basePath($app->get('app.side').DS.'views'));
 });
 
 return $app;

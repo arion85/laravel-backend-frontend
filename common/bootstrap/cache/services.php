@@ -24,7 +24,6 @@
     20 => 'Illuminate\\Translation\\TranslationServiceProvider',
     21 => 'Illuminate\\Validation\\ValidationServiceProvider',
     22 => 'Illuminate\\View\\ViewServiceProvider',
-    23 => 'Common\\App\\Providers\\AppServiceProvider',
   ),
   'eager' => 
   array (
@@ -38,7 +37,6 @@
     7 => 'Illuminate\\Pagination\\PaginationServiceProvider',
     8 => 'Illuminate\\Session\\SessionServiceProvider',
     9 => 'Illuminate\\View\\ViewServiceProvider',
-    10 => 'Common\\App\\Providers\\AppServiceProvider',
   ),
   'deferred' => 
   array (
