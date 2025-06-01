@@ -53,6 +53,12 @@ if($app->runningInConsole() || $app->runningUnitTests()){
     }else{
         $app->instance('app.side', 'frontend');
     }
+}
+
+if($app->get('app.side') != 'common'){
+    $app->useAppPath($app->basePath($app->get('app.side').DS.'app'));
+    $app->useBootstrapPath($app->basePath($app->get('app.side').DS.'bootstrap'));
+    $app->useLangPath($app->basePath($app->get('app.side').DS.'lang'));
 
     $app->get(ApplicationBuilder::class)
         ->withRouting(
@@ -60,12 +66,6 @@ if($app->runningInConsole() || $app->runningUnitTests()){
             commands: $app->basePath($app->get('app.side') . DS . 'routes' . DS . 'console.php'),
             health: '/up',
         );
-}
-
-if($app->get('app.side') != 'common'){
-    $app->useAppPath($app->basePath($app->get('app.side').DS.'app'));
-    $app->useBootstrapPath($app->basePath($app->get('app.side').DS.'bootstrap'));
-    $app->useLangPath($app->basePath($app->get('app.side').DS.'lang'));
 }
 
 $app->get(ApplicationBuilder::class)
