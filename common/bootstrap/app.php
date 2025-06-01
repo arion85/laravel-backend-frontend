@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\ArgvInput;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Bootstrap\LoadConfiguration;
 use Illuminate\Foundation\PackageManifest;
+use Illuminate\View\Factory as ViewFactory;
 
 if (!defined('DS')) {
     define('DS', DIRECTORY_SEPARATOR);
@@ -15,14 +16,20 @@ if (!defined('DS')) {
 
 $app = Application::configure(basePath: dirname(__DIR__,2))->create();
 
-$app->useEnvironmentPath(dirname(__DIR__,2));
-$app->useAppPath($app->basePath('common'.DS.'app'));
-$app->useBootstrapPath($app->basePath('common'.DS.'bootstrap'));
-$app->useLangPath($app->basePath('common'.DS.'lang'));
+// Fixed paths
+$app->useEnvironmentPath($app->basePath());
+$app->usePublicPath($app->basePath('public'));
+
+// Common Fixed Paths
 $app->useStoragePath($app->basePath('common'.DS.'storage'));
 $app->useConfigPath($app->basePath('common'.DS.'config'));
 $app->useDatabasePath($app->basePath('common'.DS.'database'));
-$app->usePublicPath($app->basePath('common'.DS.'public'));
+
+// Mutable Paths
+$app->useAppPath($app->basePath('common'.DS.'app'));
+$app->useBootstrapPath($app->basePath('common'.DS.'bootstrap'));
+$app->useLangPath($app->basePath('common'.DS.'lang'));
+
 $app->instance('path.resources',$app->basePath('common'.DS.'resources'));
 
 $app->afterResolving(PackageManifest::class, function ($pack_manifest){
@@ -47,36 +54,31 @@ if($app->runningInConsole() || $app->runningUnitTests()){
         $app->instance('app.side', 'frontend');
     }
 
-
-}
-
-//$app->get(ApplicationBuilder::class)
-//    ->withProviders(require $app->basePath($app->get('app.side').DS.'bootstrap'.DS.'providers.php'))
-//    ->withExceptions(function (Exceptions $exceptions) {
-//        //
-//    })
-//    ->withMiddleware(function (Middleware $middleware) {
-//        //
-//    });
-
-$app->beforeBootstrapping('Illuminate\Foundation\Bootstrap\RegisterProviders', function (Application $app){
-    $app_side = $app->get('app.side');
-
-    $app->useStoragePath($app->basePath($app_side.DS.'storage'));
-    $app->useAppPath($app->basePath($app_side.DS.'app'));
-    $app->useBootstrapPath($app->basePath($app_side.DS.'bootstrap'));
-
     $app->get(ApplicationBuilder::class)
         ->withRouting(
-            web: $app->basePath($app_side . DS . 'routes' . DS . 'web.php'),
-            commands: $app->basePath($app_side . DS . 'routes' . DS . 'console.php'),
+            web: $app->basePath($app->get('app.side') . DS . 'routes' . DS . 'web.php'),
+            commands: $app->basePath($app->get('app.side') . DS . 'routes' . DS . 'console.php'),
             health: '/up',
         );
-});
+}
 
-$app->beforeBootstrapping('Illuminate\Foundation\Bootstrap\BootProviders', function (Application $app){
-    $app = app();
-    $view = app('view');
+if($app->get('app.side') != 'common'){
+    $app->useAppPath($app->basePath($app->get('app.side').DS.'app'));
+    $app->useBootstrapPath($app->basePath($app->get('app.side').DS.'bootstrap'));
+    $app->useLangPath($app->basePath($app->get('app.side').DS.'lang'));
+}
+
+$app->get(ApplicationBuilder::class)
+    ->withProviders(require $app->basePath($app->get('app.side').DS.'bootstrap'.DS.'providers.php'))
+    ->withExceptions(function (Exceptions $exceptions) {
+        //
+    })
+    ->withMiddleware(function (Middleware $middleware) {
+        //
+    });
+
+$app->afterResolving(ViewFactory::class, function ($view){
+    $app=app();
     $view->addLocation($app->basePath($app->get('app.side').DS.'views'));
 });
 
