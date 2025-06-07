@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Bootstrap\LoadConfiguration;
 use Illuminate\Foundation\PackageManifest;
 use Illuminate\View\Factory as ViewFactory;
+use Symfony\Component\Finder\Finder;
 
 if (!defined('DS')) {
     define('DS', DIRECTORY_SEPARATOR);
@@ -32,9 +33,12 @@ $app->useLangPath($app->basePath('common'.DS.'lang'));
 
 $app->instance('path.resources',$app->basePath('common'.DS.'resources'));
 
+//TODO Delete this
 $app->afterResolving(PackageManifest::class, function ($pack_manifest){
     $s=$pack_manifest;
 });
+
+$app->make(LoadConfiguration::class)->bootstrap($app);
 
 if($app->runningInConsole() || $app->runningUnitTests()){
     $app_cli_side = match ((new ArgvInput())->getParameterOption('--side') ?: null){
@@ -45,7 +49,6 @@ if($app->runningInConsole() || $app->runningUnitTests()){
     $app->instance('app.side', $app_cli_side);
 }else{
     $side = Request::capture()->host();
-    $app->make(LoadConfiguration::class)->bootstrap($app);
 
     $adm_prefURL = app('config')->get('app.app_admin_prefixurl');
     if (str_starts_with($side,"{$adm_prefURL}." )) {
@@ -80,6 +83,25 @@ $app->get(ApplicationBuilder::class)
 $app->afterResolving(ViewFactory::class, function ($view){
     $app=app();
     $view->addLocation($app->basePath($app->get('app.side').DS.'views'));
+});
+
+$app->afterBootstrapping('Illuminate\Foundation\Bootstrap\LoadConfiguration', function (Application $app){
+//Loading Config Files for needed side of the site
+    $conf_files = [];
+    $side_conf_path = $app->basePath($app->get('app.side').DS.'config');
+    foreach (Finder::create()->files()->name('*.php')->in($side_conf_path) as $file) {
+        //$directory = $this->getNestedDirectory($file, $side_conf_path);
+
+        $conf_files[/*$directory.*/basename($file->getRealPath(), '.php')] = $file->getRealPath();
+    }
+    ksort($conf_files, SORT_NATURAL);
+    foreach ($conf_files as $name => $path) {
+        $config = (fn () => require $path)();
+        $config = is_array($config)?$config:[];
+        $old_repo_config = config($name)?:[];
+        $new_repo_config = array_replace_recursive($old_repo_config, $config);
+        config([$name => $new_repo_config]);
+    }
 });
 
 return $app;
