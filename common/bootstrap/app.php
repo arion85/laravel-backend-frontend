@@ -66,7 +66,7 @@ if($app->get('app.side') != 'common'){
 }
 
 $app->get(ApplicationBuilder::class)
-    ->withProviders(require $app->basePath($app->get('app.side').DS.'bootstrap'.DS.'providers.php'))
+    ->withProviders(require $app->basePath('common'.DS.'bootstrap'.DS.'providers.php'))
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })
