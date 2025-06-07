@@ -24,8 +24,15 @@
     20 => 'Illuminate\\Translation\\TranslationServiceProvider',
     21 => 'Illuminate\\Validation\\ValidationServiceProvider',
     22 => 'Illuminate\\View\\ViewServiceProvider',
-    23 => 'Common\\App\\Providers\\AppServiceProvider',
-    24 => 'Common\\App\\Providers\\AppServiceProvider',
+    23 => 'Laravel\\Pail\\PailServiceProvider',
+    24 => 'Laravel\\Sail\\SailServiceProvider',
+    25 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    26 => 'Livewire\\LivewireServiceProvider',
+    27 => 'Carbon\\Laravel\\ServiceProvider',
+    28 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    29 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    30 => 'Common\\App\\Providers\\AppServiceProvider',
+    31 => 'Common\\App\\Providers\\AppServiceProvider',
   ),
   'eager' => 
   array (
@@ -39,8 +46,13 @@
     7 => 'Illuminate\\Pagination\\PaginationServiceProvider',
     8 => 'Illuminate\\Session\\SessionServiceProvider',
     9 => 'Illuminate\\View\\ViewServiceProvider',
-    10 => 'Common\\App\\Providers\\AppServiceProvider',
-    11 => 'Common\\App\\Providers\\AppServiceProvider',
+    10 => 'Laravel\\Pail\\PailServiceProvider',
+    11 => 'Livewire\\LivewireServiceProvider',
+    12 => 'Carbon\\Laravel\\ServiceProvider',
+    13 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    14 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    15 => 'Common\\App\\Providers\\AppServiceProvider',
+    16 => 'Common\\App\\Providers\\AppServiceProvider',
   ),
   'deferred' => 
   array (
@@ -194,6 +206,9 @@
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'Illuminate\\Contracts\\Validation\\UncompromisedVerifier' => 'Illuminate\\Validation\\ValidationServiceProvider',
+    'Laravel\\Sail\\Console\\InstallCommand' => 'Laravel\\Sail\\SailServiceProvider',
+    'Laravel\\Sail\\Console\\PublishCommand' => 'Laravel\\Sail\\SailServiceProvider',
+    'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
   ),
   'when' => 
   array (
@@ -234,6 +249,12 @@
     array (
     ),
     'Illuminate\\Validation\\ValidationServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Sail\\SailServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Tinker\\TinkerServiceProvider' => 
     array (
     ),
   ),
