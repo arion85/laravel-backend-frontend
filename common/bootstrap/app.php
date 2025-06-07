@@ -7,7 +7,6 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Symfony\Component\Console\Input\ArgvInput;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Bootstrap\LoadConfiguration;
-use Illuminate\Foundation\PackageManifest;
 use Illuminate\View\Factory as ViewFactory;
 use Symfony\Component\Finder\Finder;
 
