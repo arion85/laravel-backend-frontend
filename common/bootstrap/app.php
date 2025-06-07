@@ -33,11 +33,6 @@ $app->useLangPath($app->basePath('common'.DS.'lang'));
 
 $app->instance('path.resources',$app->basePath('common'.DS.'resources'));
 
-//TODO Delete this
-$app->afterResolving(PackageManifest::class, function ($pack_manifest){
-    $s=$pack_manifest;
-});
-
 $app->make(LoadConfiguration::class)->bootstrap($app);
 
 if($app->runningInConsole() || $app->runningUnitTests()){
