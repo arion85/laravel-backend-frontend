@@ -17,6 +17,7 @@ Laravel Backend / Fronted Structure
 3. Install the project dependencies using Composer. In the project directory, run the composer install on your cmd or terminal.
 4. Copy .env.example file to .env on the root folder.
 5. Generate a new application key by running command php artisan key:generate
+6. Configure APP_ADMIN_PREFIXURL in .env file. It's subdomain for Backend starting. For example, APP_ADMIN_PREFIXURL=admin => http://admin.site.com
 
 ## Note
 1. "Common" directory contains common files (configs, service providers, etc.) for the Frontend and Backend sides of the site.
