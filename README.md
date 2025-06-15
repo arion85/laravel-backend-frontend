@@ -4,7 +4,15 @@
 Laravel Backend / Fronted Structure
 </p>
 
-<p align="center" style="color: red; font-weight: bold"> Please, DON'T upgrade previous version from current Master branch</p>
+<p align="center" style="font-weight: bold; color:red;"> Please, DON'T upgrade previous version from current Master branch</p>
+
+## Install
+
+1. Clone this repository to your local machine.
+2. Once the repository is cloned, navigate into the project directory (using the cd command on your cmd or terminal).
+3. Install the project dependencies using Composer. In the project directory, run the composer install on your cmd or terminal.
+4. Copy .env.example file to .env on the root folder.
+5. Generate a new application key by running command php artisan key:generate
 
 ## License
 
