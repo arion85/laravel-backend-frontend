@@ -1,6 +1,10 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
+<-- Sorry for mistakes (using Google Translated) -->
+</p>
+
+<p align="center">
 Laravel Backend / Fronted Structure
 </p>
 
@@ -13,6 +17,10 @@ Laravel Backend / Fronted Structure
 3. Install the project dependencies using Composer. In the project directory, run the composer install on your cmd or terminal.
 4. Copy .env.example file to .env on the root folder.
 5. Generate a new application key by running command php artisan key:generate
+
+## Note
+1. "Common" directory contains common files (configs, service providers, etc.) for the Frontend and Backend sides of the site.
+2. You can also define your own necessary components for each side of the site separately. For an example, see frontend{or backend}/config/liveware.php.
 
 ## License
 
